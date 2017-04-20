@@ -1,0 +1,13 @@
+{
+  "name": "snowball",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "jshint": "^2.9.4"
+  },
+  "dependencies": {
+    "axios": "^0.16.1"
+  }
+}
