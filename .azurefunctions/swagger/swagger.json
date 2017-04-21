@@ -1,0 +1,42 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "snowball-azure-jp-east.azurewebsites.net",
+    "version": "1.0.0"
+  },
+  "host": "snowball-azure-jp-east.azurewebsites.net",
+  "basePath": "/",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/api/latency": {
+      "get": {
+        "operationId": "/api/latency/get",
+        "produces": [],
+        "consumes": [],
+        "parameters": [],
+        "description": "Replace with Operation Object #http://swagger.io/specification/#operationObject",
+        "responses": {
+          "200": {
+            "description": "Success operation"
+          }
+        },
+        "security": [
+          {
+            "apikeyQuery": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "securityDefinitions": {
+    "apikeyQuery": {
+      "type": "apiKey",
+      "name": "code",
+      "in": "query"
+    }
+  }
+}
