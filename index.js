@@ -11,9 +11,10 @@ const getElapsed = start => {
   return Math.floor(hrTime[0] * 1000 + hrTime[1] / 1000000);
 };
 
-exports.latency = (req, res) => {
+module.exports = (context, req) => {
   if (req.query.url === undefined || req.query.method === undefined) {
-    res.status(400).end();
+    context.res = {status: 400};
+    return context.done();
   }
   const q = {
     url: req.query.url,
@@ -30,7 +31,8 @@ exports.latency = (req, res) => {
     const statusCode = resp.status;
 
     const sbResp = newResponse("", statusCode, elapsed);
-    res.json(sbResp).end();
+    context.res = {status: 200, body: sbResp, headers: {'Content-Type': 'application/json'}};
+    context.done();
   })
   .catch(err => {
     const elapsed = getElapsed(started);
@@ -42,6 +44,7 @@ exports.latency = (req, res) => {
     }
 
     const errResp = newResponse(error, -1, elapsed);
-    res.json(errResp).end();
+    context.res = {status: 200, body: errResp, headers: {'Content-Type': 'application/json'}};
+    context.done();
   });
 };
