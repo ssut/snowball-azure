@@ -23,7 +23,7 @@ module.exports = (context, req) => {
 
   let timeout = setTimeout(() => {
     timeout = null;
-    context.res = {status: 200, body: newResponse("TIMEOUT", -1, -1 {})};
+    context.res = {status: 200, body: newResponse("TIMEOUT", -1, -1, {})};
     contxt.done();
   }, 1 + q.timeout);
 
@@ -51,7 +51,7 @@ module.exports = (context, req) => {
     if (timeout === null) return;
     clearTimeout(timeout);
     console.error(e);
-    context.res = {status: 200, body: newResponse(e.toString(), -1, -1 {]})};
+    context.res = {status: 200, body: newResponse(e.toString(), -1, -1, {})};
     context.done();
   })
 };
