@@ -1,6 +1,10 @@
 "use strict";
 const httpstat = require('httpstat');
 
+const defaultHeaders = {
+  'Content-Type': 'application/json',
+};
+
 const newResponse = (error, statusCode, bodySize, latency) => ({
   error: error,
   status: statusCode,
@@ -23,7 +27,7 @@ module.exports = (context, req) => {
 
   let timeout = setTimeout(() => {
     timeout = null;
-    context.res = {status: 200, body: newResponse("TIMEOUT", -1, -1, {})};
+    context.res = {status: 200, body: newResponse("TIMEOUT", -1, -1, {}), headers: defaultHeaders};
     contxt.done();
   }, 1 + q.timeout);
 
@@ -45,13 +49,13 @@ module.exports = (context, req) => {
       delete latency.tls;
     }
 
-    context.res = {status: 200, body: newResponse("", statusCode, bodySize, latency)};
+    context.res = {status: 200, body: newResponse("", statusCode, bodySize, latency), headers: defaultHeaders};
     context.done();
   }).catch(e => {
     if (timeout === null) return;
     clearTimeout(timeout);
     console.error(e);
-    context.res = {status: 200, body: newResponse(e.toString(), -1, -1, {})};
+    context.res = {status: 200, body: newResponse(e.toString(), -1, -1, {}), headers: defaultHeaders};
     context.done();
   })
 };
